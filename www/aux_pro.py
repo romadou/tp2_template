@@ -27,3 +27,11 @@ class Process(object):
         if self.process != None:
             os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
             self.process = None
+
+    """is_running: confirms if the process has already been started
+    
+    Returns:
+        [boolean] -- Return true if the process was started / false if the process was not started before
+    """
+    def is_running(self):
+        return self.process != None
