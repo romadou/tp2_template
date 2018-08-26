@@ -28,3 +28,26 @@ class Database(object):
             self.Base.metadata.create_all(engine)
         return self.session
     
+    def set_sample(self, temperature, humidity, pressure, windspeed):
+        """Persists a sample to DB
+    
+        Returns:
+            [state] -- [True if sample saved correctly]
+        """
+        session = self.get_session()
+        sample = Samples(temperature, humidity, pressure, windspeed)
+        session.add(sample)
+        session.close()
+        return True
+
+    def get_last_samples(self):
+        """Return last saved sample
+        
+        Returns:
+            [array] -- [return a array with the 10 first samples: id, temperature, humidity, pressure and windspeed]
+        """
+        #TODO: verify if return 10 objects well done
+        session = self.get_session()
+        sample = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
+        session.close()
+        return [s.serialize() for s in sample]
