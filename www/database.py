@@ -37,6 +37,7 @@ class Database(object):
         session = self.get_session()
         sample = Samples(temperature, humidity, pressure, windspeed)
         session.add(sample)
+        session.commit()
         session.close()
         return True
 
@@ -44,10 +45,10 @@ class Database(object):
         """Return last saved sample
         
         Returns:
-            [array] -- [return a array with the 10 first samples: id, temperature, humidity, pressure and windspeed]
+            [array] -- [return an array with the 10 last samples: id, temperature, humidity, pressure and windspeed]
         """
-        #TODO: verify if return 10 objects well done
+        #TODO: verify if return 10 objects is well done
         session = self.get_session()
-        sample = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
+        samples = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
         session.close()
-        return [s.serialize() for s in sample]
+        return [s.serialize() for s in samples]
