@@ -10,29 +10,27 @@ pro = Process()
 
 @app.route('/')
 def index():
-    
-    return render_template('index.html', samples=samples)
+    return render_template('index.html')
 
 @app.route('/monitor', methods = ["POST"])
 def start_monitor():
     if pro.is_running():
         return index()
-    session = db.get_session()
     pro.start_process()
     # return render_template('monitor.html', ''' parametros ''')
-    mean = {
-        'temperature' = 21,
-        'humidity' = 9,
-        'pressure' = 1012,
-        'windspeed' = 9
+    average = {
+        'temperature' = 0,
+        'humidity' = 0,
+        'pressure' = 0,
+        'windspeed' = 0
     }
     last = {
-        'temperature' = 21,
-        'humidity' = 9,
-        'pressure' = 1012,
-        'windspeed' = 9
+        'temperature' = 0,
+        'humidity' = 0,
+        'pressure' = 0,
+        'windspeed' = 0
     }
-    return render_template('monitor.html', mean=mean, last=last)
+    return render_template('monitor.html', last=last, average=average)
 
 @app.route('/monitor', methods = ["GET"])
 def monitor():
@@ -45,29 +43,35 @@ def monitor():
     last['pressure'] = samples[0]['pressure']
     last['windspeed'] = samples[0]['windspeed']
     
-    mean['temperature'] = 0
-    mean['humidity'] = 0
-    mean['pressure'] = 0
-    mean['windspeed'] = 0
+    average['temperature'] = 0
+    average['humidity'] = 0
+    average['pressure'] = 0
+    average['windspeed'] = 0
     
     samples_number = range(len(samples))
     
     for i in samples_number:
-        mean['temperature'] += samples[i]['temperature']
-        mean['humidity'] += samples[i]['humidity']
-        mean['pressure'] += samples[i]['pressure']
-        mean['windspeed'] += samples[i]['windspeed']
+        average['temperature'] += samples[i]['temperature']
+        average['humidity'] += samples[i]['humidity']
+        average['pressure'] += samples[i]['pressure']
+        average['windspeed'] += samples[i]['windspeed']
     
-    mean['temperature'] /= samples_number
-    mean['humidity'] /= samples_number
-    mean['pressure'] /= samples_number
-    mean['windspeed'] /= samples_number
-    return render_template('monitor.html', last=last, mean=mean)
+    average['temperature'] /= samples_number
+    average['humidity'] /= samples_number
+    average['pressure'] /= samples_number
+    average['windspeed'] /= samples_number
+
+    # TODO: check if well handling the dictionary with the jsonify
+    data = [last, average]
+    return jsonify(data)
+    # return render_template('monitor.html', last=last, average=average)
 
 @app.route('/monitor/stop', methods = ["GET"])
 def stop_monitor():
     data = pro.stop_process()
-    return jsonify({"status": data})
+    return redirect('/')
+    # TODO: ver qué onda este otro return
+    # return jsonify({"status": data})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8888)
