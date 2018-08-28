@@ -10,34 +10,20 @@ pro = Process()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', status='index')
 
-@app.route('/monitor', methods = ["POST"])
+@app.route('/monitor', methods = ["GET"])
 def start_monitor():
     if pro.is_running():
         return index()
     pro.start_process()
-    # return render_template('monitor.html', ''' parametros ''')
-    average = {
-        'temperature' = 0,
-        'humidity' = 0,
-        'pressure' = 0,
-        'windspeed' = 0
-    }
-    last = {
-        'temperature' = 0,
-        'humidity' = 0,
-        'pressure' = 0,
-        'windspeed' = 0
-    }
-    return render_template('monitor.html', last=last, average=average)
+    return render_template('monitor.html', status='monitor')
 
-@app.route('/monitor', methods = ["GET"])
+@app.route('/monitor/get_data', methods = ["GET"])
 def monitor():
-    # TODO: esta función debe ser llamada cada n segundos (petición desde "monitor.js")
-    # TODO: probar verificando que la serialización funciona según lo esperado
     samples = db.get_last_samples()
 
+    # Última muestra tomada
     last['temperature'] = samples[0]['temperature']
     last['humidity'] = samples[0]['humidity']
     last['pressure'] = samples[0]['pressure']
@@ -50,6 +36,7 @@ def monitor():
     
     samples_number = range(len(samples))
     
+    # Promedio de las 10 (o menos, si no las hay) últimas muestras tomadas
     for i in samples_number:
         average['temperature'] += samples[i]['temperature']
         average['humidity'] += samples[i]['humidity']
@@ -61,17 +48,14 @@ def monitor():
     average['pressure'] /= samples_number
     average['windspeed'] /= samples_number
 
-    # TODO: check if well handling the dictionary with the jsonify
+    # TODO: check if well handling the dictionary with the jsonify; if not, do it like on tp2_exercise
     data = [last, average]
     return jsonify(data)
-    # return render_template('monitor.html', last=last, average=average)
 
 @app.route('/monitor/stop', methods = ["GET"])
 def stop_monitor():
     data = pro.stop_process()
     return redirect('/')
-    # TODO: ver qué onda este otro return
-    # return jsonify({"status": data})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8888)
