@@ -1,5 +1,5 @@
 from database import Database
-from models import Sample
+from models import Samples
 
 import random
 import time
@@ -22,6 +22,7 @@ def main(db):
     humidity = 10
     pressure = 1013
     windspeed = 8
+    db.set_sample(temperature, humidity, pressure, windspeed)
     while(1):
         temperature += random.randint(0,3) * random.choice([-1,0,1])
         humidity += random.randint(0,10) * random.choice([-1,0,1])

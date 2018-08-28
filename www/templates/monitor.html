@@ -1,0 +1,96 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<diV class= "row w-100">
+    <div class="w-25 d-md-flex flex-md-equal my-md-3 pl-md-3">
+        <div class="bg-light pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-100">
+            <ul class="list-group list-group-flush settings-menu">
+                <li class="list-group-item">
+                    <h4>Recolección de muestras</h4>
+                    <button class="botones">Iniciar</button>
+                    <button class="botones">Finalizar</button>
+                    <div class="espacio"></div>
+                </li>
+                <li class="list-group-item">
+                    <div class="espacio"></div>
+                    <h3>Configuración</h3>
+                    <h5>Tiempo de muestreo</h5>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle botones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Segundos
+                        </button>
+                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                            <span class="dropdown-item" id="1-second">1 segundo</span>
+                            <span class="dropdown-item" href="2-seconds">2 segundos</span>
+                            <span class="dropdown-item" href="5-seconds">5 segundos</span>
+                            <span class="dropdown-item" href="10-seconds">10 segundos</span>
+                            <span class="dropdown-item" href="30-seconds">30 segundos</span>
+                            <span class="dropdown-item" href="60-seconds">60 segundos</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="w-75 weather-values">
+        <div class="d-md-flex flex-md-equal my-md-3 pl-md-3 weather-values">
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-5 text-center overflow-hidden w-50 reducido">
+                <h4>Temperatura</h4>
+                <div class="p-3">
+                    <p class="no-margin-bottom">Actual</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="last-temperature"> 00 </span> &nbsp°
+                    </nav>
+                    <p class="no-margin-bottom">Promedio</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="average-temperature"> 00 </span> &nbsp°
+                    </nav>
+                </div>
+            </div>
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-5 text-center overflow-hidden w-50 reducido">
+                <h4>Humedad</h4>
+                <div class="p-3"> 
+                    <p class="no-margin-bottom">Actual</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="last-humidity"> 00 </span> &nbsp%
+                    </nav>
+                    <p class="no-margin-bottom">Promedio</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="average-humidity"> 00 </span> &nbsp%
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal my-md-3 pl-md-3">
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-5 text-center overflow-hidden w-50 reducido">
+                <h4>Presión atmosférica</h4>
+                <div class="p-3">
+                    <p class="no-margin-bottom">Actual</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="last-temperature"> 00 </span> &nbsphPa
+                    </nav>
+                    <p class="no-margin-bottom">Promedio</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="last-temperature"> 00 </span> &nbsphPa
+                    </nav>
+                </div>
+            </div>
+            <div class="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-5 text-center overflow-hidden w-50 reducido">
+                <h4>Velocidad del viento</h4>
+                <div class="p-3"> 
+                    <p class="no-margin-bottom">Actual</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item" id="last-temperature"> 00 </span> &nbspkm/h
+                    </nav>
+                    <p class="no-margin-bottom">Promedio</p>
+                    <nav class="breadcrumb justify-content-center bg-white border border-grey">
+                        <span class="breadcrumb-item " id="last-temperature"> 00 </span> &nbspkm/h
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</diV>
+{% endblock %}
+
+<script src="/static/js/monitor.js"></script>

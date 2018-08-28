@@ -1,0 +1,58 @@
+.bg-cielo, .bg-cielo div a:link, .bg-cielo div a:hover, .bg-cielo div a:visited, .bg-cielo div a:active{
+    background-color: #166094;
+    color: whitesmoke;
+    text-decoration: none;
+}
+.bg-cielo div a{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.title-white{
+    color:whitesmoke;
+    -webkit-text-stroke: 0.5px black;
+}
+
+.bg-img-cielo{
+    background-image: url("/static/img/clouds.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat; 
+}
+
+.no-margin-bottom{
+    margin-bottom: 0px;
+}
+
+.settings-menu li{
+    background-color: #f9f9f9;
+}
+
+.settings-menu li button{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.weather-values, .inicio{
+    height: 100%;
+}
+
+.weather-values div{
+    height: 50%;
+}
+
+.espacio{
+    height: 20px;
+}
+
+.reducido div nav{
+    height: 60%;
+    padding: 0px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.botones{
+    background-color: white;
+    border-color:white;
+    border-radius: 5px;
+}

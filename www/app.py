@@ -1,8 +1,8 @@
 # Imports
 from database import Database
-from process import Process
+from aux_pro import Process
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for, redirect
 
 app = Flask(__name__)
 db = Database()
@@ -10,6 +10,7 @@ pro = Process()
 
 @app.route('/')
 def index():
+    pro.stop_process()
     return render_template('index.html', status='index')
 
 @app.route('/monitor', methods = ["GET"])
@@ -54,7 +55,7 @@ def monitor():
 
 @app.route('/monitor/stop', methods = ["GET"])
 def stop_monitor():
-    data = pro.stop_process()
+    pro.stop_process()
     return redirect('/')
 
 if __name__ == "__main__":
