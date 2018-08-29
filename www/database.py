@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 import os
 
+from models import Samples
+
 class Database(object):
     session = None
     db_user = os.getenv("DB_USER") if os.getenv("DB_USER") != None else "example"

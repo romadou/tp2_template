@@ -1,5 +1,6 @@
 /* Cuando la página se carga, se comienzan a recuperar muestras */
-$(document).ready(function(){
+$("#start-sampling").click(function(){
+    console.log('Se empieza a muestrear');
     start_get_data();
 });
 
@@ -7,20 +8,29 @@ var control_data;
 function start_get_data(){
     // Establece el período de actualización cada 1 segundo
     control_data = setInterval(get_data, 1000);
-    $("#refresh-interval").html(1);
 }
 
 /* Recupera los parámetros temporales de la base de datos y los dirige al navegador */
 function get_data(){
+    //console.log("pre-in");
     $.get("/monitor/get_data", function(data){
+        //console.log("in");
         $("#last-temperature").html(data[0].temperature);
+        //console.log('t1');
         $("#last-humidity").html(data[0].humidity);
+        //console.log("h1");
         $("#last-pressure").html(data[0].pressure);
+        //console.log("p1");
         $("#last-windspeed").html(data[0].windspeed);
+        //console.log("w1");
         $("#average-temperature").html(data[1].temperature);
+        //console.log("t2");
         $("#average-humidity").html(data[1].humidity);
+        //console.log("h2");
         $("#average-pressure").html(data[1].pressure);
+        //console.log("p2");
         $("#average-windspeed").html(data[1].windspeed);
+        //console.log("w2");
     });
 }
 
@@ -31,6 +41,7 @@ function stop_get_data(){
 
 /* Botón que interrumpe la recuperación de muestras */
 $("#stop-sampling").click(function(){    
+    console.log('Se deja de muestrear');
     stop_get_data();
     //$.get("/monitor/stop");
 });
@@ -42,29 +53,23 @@ function set_refresh_interval(milliseconds){
 }
 
 /* Botones de selección del período de actualización de valores */
-$("#button-1-sec").click(function(){    
+$("#1-second").click(function(){    
     set_refresh_interval(1000)
-    $("#refresh-interval").html(1);
 });
-$("#button-2-sec").click(function(){    
+$("#2-seconds").click(function(){    
     set_refresh_interval(2000)
-    $("#refresh-interval").html(2);
 });
-$("#button-5-sec").click(function(){    
+$("#5-seconds").click(function(){    
     set_refresh_interval(5000)
-    $("#refresh-interval").html(5);
 });
-$("#button-10-sec").click(function(){    
+$("#10-seconds").click(function(){    
     set_refresh_interval(10000)
-    $("#refresh-interval").html(10);
 });
-$("#button-30-sec").click(function(){    
+$("#30-seconds").click(function(){    
     set_refresh_interval(30000)
-    $("#refresh-interval").html(30);
 });
-$("#button-60-sec").click(function(){    
+$("#60-seconds").click(function(){    
     set_refresh_interval(60000)
-    $("#refresh-interval").html(60);
 });
 
 /* Comportamiento ante la salida no habitual de la página: finalización de la actualización de valores */

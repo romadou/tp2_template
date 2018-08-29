@@ -2,7 +2,12 @@
 from database import Database
 from aux_pro import Process
 from flask import Flask
-from flask import render_template, url_for, redirect
+from flask import render_template
+from flask import url_for
+from flask import redirect
+from flask import jsonify
+import datetime
+import os
 
 app = Flask(__name__)
 db = Database()
@@ -49,8 +54,18 @@ def monitor():
     average['pressure'] /= samples_number
     average['windspeed'] /= samples_number
 
-    # TODO: check if well handling the dictionary with the jsonify; if not, do it like on tp2_exercise
-    data = [last, average]
+    data = [{
+        'temperature' : samples[0]['temperature'],
+        'humidity' : samples[0]['humidity'],
+        'pressure' : samples[0]['pressure'],
+        'windspeed' : samples[0]['windspeed'] 
+    },{
+        'temperature' : average['temperature'],
+        'humidity' : average['humidity'],
+        'pressure' : average['pressure'],
+        'windspeed' : average['windspeed']
+    }]
+
     return jsonify(data)
 
 @app.route('/monitor/stop', methods = ["GET"])
@@ -59,5 +74,6 @@ def stop_monitor():
     return redirect('/')
 
 if __name__ == "__main__":
+    app.debug = True
     app.run(host='0.0.0.0', port=8888)
 

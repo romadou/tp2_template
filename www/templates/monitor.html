@@ -7,8 +7,8 @@
             <ul class="list-group list-group-flush settings-menu">
                 <li class="list-group-item">
                     <h4>Recolección de muestras</h4>
-                    <button class="botones">Iniciar</button>
-                    <button class="botones">Finalizar</button>
+                    <button class="botones" id="start-sampling">Iniciar</button>
+                    <button class="botones" id="stop-sampling">Finalizar</button>
                     <div class="espacio"></div>
                 </li>
                 <li class="list-group-item">
@@ -21,11 +21,11 @@
                         </button>
                         <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
                             <span class="dropdown-item" id="1-second">1 segundo</span>
-                            <span class="dropdown-item" href="2-seconds">2 segundos</span>
-                            <span class="dropdown-item" href="5-seconds">5 segundos</span>
-                            <span class="dropdown-item" href="10-seconds">10 segundos</span>
-                            <span class="dropdown-item" href="30-seconds">30 segundos</span>
-                            <span class="dropdown-item" href="60-seconds">60 segundos</span>
+                            <span class="dropdown-item" id="2-seconds">2 segundos</span>
+                            <span class="dropdown-item" id="5-seconds">5 segundos</span>
+                            <span class="dropdown-item" id="10-seconds">10 segundos</span>
+                            <span class="dropdown-item" id="30-seconds">30 segundos</span>
+                            <span class="dropdown-item" id="60-seconds">60 segundos</span>
                         </div>
                     </div>
                 </li>
@@ -92,5 +92,3 @@
     </div>
 </diV>
 {% endblock %}
-
-<script src="/static/js/monitor.js"></script>
