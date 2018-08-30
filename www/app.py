@@ -60,9 +60,13 @@ def monitor():
     
     if samples_number > 0:
         average['temperature'] /= samples_number
+        average['temperature'] = round(average['temperature'], 4)
         average['humidity'] /= samples_number
+        average['humidity'] = round(average['humidity'], 4)
         average['pressure'] /= samples_number
+        average['pressure'] = round(average['pressure'], 4)
         average['windspeed'] /= samples_number
+        average['windspeed'] = round(average['windspeed'], 4)
 
     # Normalizacion del formato de la respuesta de la funcion
     data = [{
