@@ -19,6 +19,16 @@
     background-repeat: no-repeat; 
 }
 
+footer.bg-cielo{
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+}
+
+footer.bg-cielo>.container {
+    justify-content: center;
+}
+
 .no-margin-bottom{
     margin-bottom: 0px;
 }
