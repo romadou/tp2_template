@@ -34,31 +34,25 @@ def monitor():
 
     last = {}
     average = {}
-    # Ultima muestra tomada
-    if samples_number > 0:
-        last['temperature'] = samples[0]['temperature']
-        last['humidity'] = samples[0]['humidity']
-        last['pressure'] = samples[0]['pressure']
-        last['windspeed'] = samples[0]['windspeed']
-    else:
-        last['temperature'] = 0
-        last['humidity'] = 0
-        last['pressure'] = 0
-        last['windspeed'] = 0
-
+    
     average['temperature'] = 0
     average['humidity'] = 0
     average['pressure'] = 0
     average['windspeed'] = 0
-    
+
     # Promedio de las 10 (o menos, si no las hay) ultimas muestras tomadas
     for s in samples:
         average['temperature'] += s['temperature']
         average['humidity'] += s['humidity']
         average['pressure'] += s['pressure']
         average['windspeed'] += s['windspeed']
-    
+
+    # Ultima muestra tomada
     if samples_number > 0:
+        last['temperature'] = samples[0]['temperature']
+        last['humidity'] = samples[0]['humidity']
+        last['pressure'] = samples[0]['pressure']
+        last['windspeed'] = samples[0]['windspeed']
         average['temperature'] /= samples_number
         average['temperature'] = round(average['temperature'], 4)
         average['humidity'] /= samples_number
@@ -67,6 +61,11 @@ def monitor():
         average['pressure'] = round(average['pressure'], 4)
         average['windspeed'] /= samples_number
         average['windspeed'] = round(average['windspeed'], 4)
+    else:
+        last['temperature'] = 0
+        last['humidity'] = 0
+        last['pressure'] = 0
+        last['windspeed'] = 0
 
     # Normalizacion del formato de la respuesta de la funcion
     data = [{

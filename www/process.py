@@ -24,22 +24,27 @@ def main(db):
     windspeed = 8
     while True:
         db.set_sample(temperature, humidity, pressure, windspeed)
+
         temperature += random.randint(0,3) * random.choice([-1,0,1])
         if temperature < -10:
             temperature = -10
         elif temperature > 35:
             temperature = 35
+        
         humidity += random.randint(0,10) * random.choice([-1,0,1])
         if humidity < 0:
             humidity = 0
         elif humidity > 100:
             humidity = 100
+        
         pressure += random.randrange(0,100,7) * random.choice([-1,0,1])
+        
         windspeed += random.randint(0,5) * random.choice([-1,0,1])
         if windspeed < 0:
             windspeed = 0
         elif windspeed > 300:
             windspeed = 300
+        
         time.sleep(1)
         if killer.kill_now:
            session.close()
