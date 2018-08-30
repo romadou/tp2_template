@@ -21,8 +21,8 @@ SET time_zone = "-03:00";
 --
 -- Base de datos: `samples`
 --
-CREATE DATABASE IF NOT EXISTS `samples` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `samples`;
+CREATE DATABASE IF NOT EXISTS `tp2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `tp2`;
 
 -- --------------------------------------------------------
 
