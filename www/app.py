@@ -20,9 +20,8 @@ def index():
 
 @app.route('/monitor', methods = ["GET"])
 def start_monitor():
-    if pro.is_running():
-        return index()
-    pro.start_process()
+    if not pro.is_running():
+        pro.start_process()
     return render_template('monitor.html', status='monitor')
 
 @app.route('/monitor/get_data', methods = ["GET"])
@@ -63,6 +62,7 @@ def monitor():
         average['pressure'] /= samples_number
         average['windspeed'] /= samples_number
 
+    # Normalización del formato de la respuesta de la funcion
     data = [{
         'temperature' : last['temperature'],
         'humidity' : last['humidity'],
@@ -80,7 +80,7 @@ def monitor():
 @app.route('/monitor/stop', methods = ["GET"])
 def stop_monitor():
     pro.stop_process()
-    return redirect('/')
+    return index()
 
 if __name__ == "__main__":
     app.debug = True

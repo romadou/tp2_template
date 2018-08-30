@@ -15,7 +15,7 @@ class Samples(Base):
     windspeed=Column('windspeed', Integer)
 
     def serialize(self):
-        """Devuelve los datos del objeto en una forma interpretable fácilmente"""
+        """Devuelve los datos del objeto en una forma interpretable facilmente"""
         return {
             'id'  : self.id,
             'temperature': self.temperature,

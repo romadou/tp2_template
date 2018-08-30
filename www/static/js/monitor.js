@@ -4,52 +4,47 @@ $("#start-sampling").click(function(){
     start_get_data();
 });
 
-var control_data;
+var milliseconds = 1000;
+var refresh_time = 0;
+var refresh_control;
+
 function start_get_data(){
     // Establece el período de actualización cada 1 segundo
-    control_data = setInterval(get_data, 1000);
+    refresh_time = 1;    
+    refresh_control = setTimeout(get_data, milliseconds);
 }
+
 
 /* Recupera los parámetros temporales de la base de datos y los dirige al navegador */
 function get_data(){
-    //console.log("pre-in");
     $.get("/monitor/get_data", function(data){
-        //console.log("in");
         $("#last-temperature").html(data[0].temperature);
-        //console.log('t1');
         $("#last-humidity").html(data[0].humidity);
-        //console.log("h1");
         $("#last-pressure").html(data[0].pressure);
-        //console.log("p1");
         $("#last-windspeed").html(data[0].windspeed);
-        //console.log("w1");
         $("#average-temperature").html(data[1].temperature);
-        //console.log("t2");
         $("#average-humidity").html(data[1].humidity);
-        //console.log("h2");
         $("#average-pressure").html(data[1].pressure);
-        //console.log("p2");
         $("#average-windspeed").html(data[1].windspeed);
-        //console.log("w2");
     });
+    refresh_control = setTimeout(get_data, milliseconds);
 }
 
-/* Interrupción de la recolección de muestras */
+/* Interrupción de la actualización de muestras en pantalla */
 function stop_get_data(){
-    clearInterval(control_data);
+    refresh_time = 0;
+    clearTimeout(refresh_control);
 }
 
-/* Botón que interrumpe la recuperación de muestras */
+/* Botón que interrumpe la recuperación de muestras al browser */
 $("#stop-sampling").click(function(){    
     console.log('Se deja de muestrear');
     stop_get_data();
-    //$.get("/monitor/stop");
 });
 
 /* Modificación del período de actualización de valores */
-function set_refresh_interval(milliseconds){
-    clearInterval(control_data);
-    control_data = setInterval(milliseconds);
+function set_refresh_interval(ms){
+    milliseconds = ms;
 }
 
 /* Botones de selección del período de actualización de valores */

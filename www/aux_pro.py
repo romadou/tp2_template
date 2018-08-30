@@ -17,8 +17,7 @@ class Process(object):
         if self.process == None:
             cmd = "python process.py"
             self.process = subprocess.Popen(cmd.split(), preexec_fn=os.setsid)
-            return self.process.pid
-        return None
+        return self.process.pid
     
     """stop_process: kill the process if there is a process executed
     """
