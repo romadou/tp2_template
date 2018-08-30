@@ -22,13 +22,12 @@ def main(db):
     humidity = 10
     pressure = 1013
     windspeed = 8
-    db.set_sample(temperature, humidity, pressure, windspeed)
     while(True):
+        db.set_sample(temperature, humidity, pressure, windspeed)
         temperature += random.randint(0,3) * random.choice([-1,0,1])
         humidity += random.randint(0,10) * random.choice([-1,0,1])
         pressure += random.randrange(0,100,7) * random.choice([-1,0,1])
         windspeed += random.randint(0,5) * random.choice([-1,0,1])
-        db.set_sample(temperature, humidity, pressure, windspeed)
         time.sleep(1)
         if killer.kill_now:
            session.close()

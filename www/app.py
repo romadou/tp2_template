@@ -20,12 +20,14 @@ def index():
 
 @app.route('/monitor', methods = ["GET"])
 def start_monitor():
+    # Comienza a generar muestras si no lo estaba haciendo
     if not pro.is_running():
         pro.start_process()
     return render_template('monitor.html', status='monitor')
 
 @app.route('/monitor/get_data', methods = ["GET"])
 def monitor():
+    # Recupera las ultimas diez muestras de la BD
     samples = db.get_last_samples()
 
     samples_number = len(samples)
@@ -62,7 +64,7 @@ def monitor():
         average['pressure'] /= samples_number
         average['windspeed'] /= samples_number
 
-    # Normalización del formato de la respuesta de la funcion
+    # Normalizacion del formato de la respuesta de la funcion
     data = [{
         'temperature' : last['temperature'],
         'humidity' : last['humidity'],

@@ -16,10 +16,10 @@ class Database(object):
     Base = declarative_base()
     
     def get_session(self):
-        """Singleton of db connection
+        """Singleton de la conexion a la DB
 
         Returns:
-            [db connection] -- [Singleton of db connection]
+            [db connection] -- [Singleton de la conexion a la DB]
         """
         if self.session == None:
             connection = 'mysql+mysqlconnector://%s:%s@%s:%s/%s' % (self.db_user,self.db_pass,self.db_host,self.db_port,self.db_name)
@@ -31,10 +31,10 @@ class Database(object):
         return self.session
     
     def set_sample(self, temperature, humidity, pressure, windspeed):
-        """Persists a sample to DB
+        """Persiste una muestra a la DB
     
         Returns:
-            [state] -- [True if sample saved correctly]
+            [state] -- [True si la muestra fue guardada correctamente]
         """
         session = self.get_session()
         sample = Samples(temperature=temperature, humidity=humidity, pressure=pressure, windspeed=windspeed)
@@ -44,10 +44,10 @@ class Database(object):
         return True
 
     def get_last_samples(self):
-        """Return last saved sample
+        """Devuelve la ultima muestra
         
         Returns:
-            [array] -- [return an array with the 10 last samples: id, temperature, humidity, pressure and windspeed]
+            [array] -- [arreglo con las ultimas 10 muestras tomadas: id, temperatura, humedad, presion atmosferica y velocidad del viento]
         """
         session = self.get_session()
         samples = session.query(Samples).order_by(Samples.id.desc()).limit(10).all()
