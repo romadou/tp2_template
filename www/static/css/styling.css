@@ -20,7 +20,7 @@
 }
 
 footer.bg-cielo{
-    position: absolute !important;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
